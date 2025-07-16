@@ -1,0 +1,4 @@
+edge_tts
+faster_whisper
+telebot
+python-dotenv
