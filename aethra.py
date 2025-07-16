@@ -1,22 +1,31 @@
-import edge_tts
-from faster_whisper import WhisperModel
-import asyncio
-import telebot
-from telebot import types
-import json
-import os
-import dotenv as fsdlkm
+"""
+It is Aethra - TTS and STT bot for telegram..
 
-fsdlkm.load_dotenv()
+Classes:
+- Markups: Contains all markups for buttons and languages.
+- Backend: Contains all backend (TTS and STT) methods.
+- Frontend: Contains all frontend (Telegram) methods and commands.
+- Frontend.Commands: Contains all commands for the bot.
+"""
+import edge_tts # Text _> Speech (TTS)
+from faster_whisper import WhisperModel # Speech -> Text (STT)
+import asyncio # Asyncio for async functions
+import telebot # Telegram bot library
+from telebot import types # Types for inline keyboard buttons
+import json # For reading json files
+import os # For making directories and reading environment variables
+import dotenv # For reading .env file
+
+dotenv.load_dotenv()
 TOKEN = os.getenv("TOKEN")
-os
+
 os.makedirs("temp", exist_ok=True) #* Making temp folder if it doesn't exist
 
 with open("RPV.json", encoding="utf-8") as f:
-    RPV = json.load(f)
+    RPV = json.load(f) # Rates, pitches and volumes
 
 with open("voices.json", encoding = "utf-8") as f:
-    voices = json.load(f)
+    voices = json.load(f) # Voices names and codes
 
 voices_names_male = voices["voices_names_male"]
 voices_name_female = voices["voices_names_female"]
@@ -154,20 +163,25 @@ class Frontend:
         try:
             if message.content_type == 'text':
                 users[message.chat.id]['output_file'] = f"temp\\{message.chat.id}.wav" # Making output path
+
                 file = asyncio.run(Backend.say(message.text, message.chat.id)) 
                 bot.send_audio(message.chat.id, open(file, 'rb'), caption="Here is your audio!") # Sending audio
+
                 os.remove(users[message.chat.id]['output_file']) #* Deleting temporary files
             elif message.content_type in ('audio', 'voice'):
                 bot.send_message(message.chat.id, "Please, wait. It might take a while...") 
+
                 file_id = (message.voice or message.audio).file_id
                 file_info = bot.get_file(file_id)
                 downloaded = bot.download_file(file_info.file_path) # Downloading file from telegram servers
+
                 input_path= f'temp\\{message.chat.id}.ogg' # Input path
                 with open(input_path, 'wb') as f:
                     f.write(downloaded)
 
                 text = Backend.write(input_path, message.chat.id)
                 bot.send_message(message.chat.id, text) # Sending text
+
                 os.remove(input_path) #* Deleting temporary files
         except edge_tts.exceptions.NoAudioReceived:
             bot.send_message(message.chat.id, "Something's wrong with your text. Check your language!") # In case NoAudioReceived Error
@@ -202,4 +216,4 @@ class Frontend:
             bot.send_message(call.message.chat.id, f"Current volume is {users[call.message.chat.id]['volume']}")
 
 print("Bot started!") #? Logs
-bot.polling() #* Main func 
+bot.polling() #* Main func
