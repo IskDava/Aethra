@@ -10,7 +10,7 @@ import dotenv as fsdlkm
 fsdlkm.load_dotenv()
 TOKEN = os.getenv("TOKEN")
 
-os.mkdir("temp", exist_ok=True) #* Making temp folder if it doesn't exist
+os.makedirs("temp", exist_ok=True) #* Making temp folder if it doesn't exist
 
 with open("RPV.json", encoding="utf-8") as f:
     RPV = json.load(f)
