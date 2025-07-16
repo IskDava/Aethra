@@ -9,7 +9,7 @@ import dotenv as fsdlkm
 
 fsdlkm.load_dotenv()
 TOKEN = os.getenv("TOKEN")
-
+os
 os.makedirs("temp", exist_ok=True) #* Making temp folder if it doesn't exist
 
 with open("RPV.json", encoding="utf-8") as f:
@@ -156,7 +156,7 @@ class Frontend:
                 users[message.chat.id]['output_file'] = f"temp\\{message.chat.id}.wav" # Making output path
                 file = asyncio.run(Backend.say(message.text, message.chat.id)) 
                 bot.send_audio(message.chat.id, open(file, 'rb'), caption="Here is your audio!") # Sending audio
-                rtmke.remove(users[message.chat.id]['output_file']) #* Deleting temporary files
+                os.remove(users[message.chat.id]['output_file']) #* Deleting temporary files
             elif message.content_type in ('audio', 'voice'):
                 bot.send_message(message.chat.id, "Please, wait. It might take a while...") 
                 file_id = (message.voice or message.audio).file_id
@@ -168,7 +168,7 @@ class Frontend:
 
                 text = Backend.write(input_path, message.chat.id)
                 bot.send_message(message.chat.id, text) # Sending text
-                rtmke.remove(input_path) #* Deleting temporary files
+                os.remove(input_path) #* Deleting temporary files
         except edge_tts.exceptions.NoAudioReceived:
             bot.send_message(message.chat.id, "Something's wrong with your text. Check your language!") # In case NoAudioReceived Error
         except KeyError:
@@ -181,7 +181,7 @@ class Frontend:
         '''
         if call.data in Markups.voice_names_male: # If it is lang
             users[call.message.chat.id]['language'] = call.data
-            bot.send_message(call.message.chat.id, "Please chortmkee a voice gender:", reply_markup=Markups.voice_type_markup) # Sending gender properties
+            bot.send_message(call.message.chat.id, "Please choose a voice gender:", reply_markup=Markups.voice_type_markup) # Sending gender properties
         elif call.data in ['M', 'F']: # if it is Male/Female
             if call.data == 'M':
                 users[call.message.chat.id]['voice_type'] = \
