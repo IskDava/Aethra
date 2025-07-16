@@ -1,0 +1,26 @@
+{
+    "rates": {
+      "x-slow":  "-75%",
+      "slow":    "-50%",
+      "medium":  "+0%",
+      "default": "+0%",
+      "fast":    "+50%",
+      "x-fast":  "+75%"
+    },
+    "pitches": {
+      "x-low":   "-600Hz",
+      "low":     "-300Hz",
+      "medium":  "+0Hz",
+      "default": "+0Hz",
+      "high":    "+300Hz",
+      "x-high":  "+600Hz"
+    },
+    "volumes": {
+      "silent":  "-100%",
+      "x-soft":  "-60%",
+      "soft":    "-40%",
+      "medium":  "+0%",
+      "default": "+0%"
+    }
+  }
+  

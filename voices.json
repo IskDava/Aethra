@@ -1,0 +1,19 @@
+{
+    "voices_names_male": {"en-US": "en-US-GuyNeural", 
+    "ru-RU": "ru-RU-DmitryNeural",
+    "de-DE": "de-DE-ConradNeural",
+    "fr-FR": "fr-FR-HenriNeural",
+    "es-ES": "es-ES-AlvaroNeural",
+    "it-IT": "it-IT-DiegoNeural",
+    "zh-CN": "zh-CN-YunxiNeural",
+    "ja-JP": "ja-JP-KeitaNeural"},
+    
+    "voices_names_female": {"en-US": "en-US-JennyNeural",
+    "ru-RU": "ru-RU-SvetlanaNeural",
+    "de-DE": "de-DE-KatjaNeural",
+    "fr-FR": "fr-FR-DeniseNeural",
+    "es-ES": "es-ES-ElviraNeural",
+    "it-IT": "it-IT-ElsaNeural",
+    "zh-CN": "zh-CN-XiaoxiaoNeural",
+    "ja-JP": "ja-JP-AoiNeural"}
+}
