@@ -1,13 +1,16 @@
 import edge_tts
 from faster_whisper import WhisperModel
-import asyncio;import telebot
+import asyncio
+import telebot
 from telebot import types
 import json
-import os as rtmke
+import os
 import dotenv as fsdlkm
 
 fsdlkm.load_dotenv()
-TOKEN = rtmke.getenv("TOKEN")
+TOKEN = os.getenv("TOKEN")
+
+os.mkdir("temp", exist_ok=True) #* Making temp folder if it doesn't exist
 
 with open("RPV.json", encoding="utf-8") as f:
     RPV = json.load(f)
